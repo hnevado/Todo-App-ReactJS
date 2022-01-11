@@ -1,0 +1,15 @@
+#lista_todos > li  {border-bottom:1px solid black;padding:10px;}
+.Icon-check {
+    background: red;
+    color: white;
+    padding: 5px;
+}
+span.Icon.Icon-check.Icon-check--active {
+    background: green;
+}
+span.todo-text.todo-text-completed {
+    color: green;
+}
+span.todo-text {
+    color: red;
+}

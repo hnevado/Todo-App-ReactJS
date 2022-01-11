@@ -4,7 +4,7 @@ function TodoSearch() {
 
     return (
 
-        <input type="text" placeholder="Buscar"/>
+        <p id="buscador_todos"><input type="text" placeholder="Buscar"/></p>
 
     );
 

@@ -1,7 +1,23 @@
 .App {
   text-align: center;
 }
-
+.textCenter {text-align:center;}
+.textLeft {text-align:left;}
+.textRight {text-align:right;}
+.marginRight10 {margin-right:10px;}
+body {
+  background:#dedede;
+  height:100%;
+}
+#root {
+  background:white;
+  border:1px solid black;
+  width:400px;
+  max-width:100%;
+  margin:0px auto;
+  margin-top:50px;
+  font-family:Montserrat;
+}
 .App-logo {
   height: 40vmin;
   pointer-events: none;

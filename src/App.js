@@ -4,13 +4,17 @@ import {TodoSearch} from './TodoSearch';
 import {TodoList} from './TodoList';
 import {TodoItem} from './TodoItem';
 import {CreateTodoButton} from './CreateTodoButton';
-
+import './TodoCounter.css';
+import './TodoItem.css';
+import './TodoList.css';
+import './TodoSearch.css';
+import './CreateTodoButton.css';
 import './App.css';
 
 //Creamos un array con objetos para una lista de todos predefinida
 const todos = [
 
-   {id:1, text: 'Ver la teoría de reactjs', completed:false},
+   {id:1, text: 'Leer documentación reactjs', completed:true},
    {id:2, text: 'Crear un proyecto reactjs', completed:false},
    {id:3, text: 'Programar una app con reactjs', completed:false},
 
@@ -31,7 +35,7 @@ function App(props) {
 
         {todos.map(todo => (
           //Por cada todo, renderizamos un TodoItem
-          <TodoItem key={todo.id} text={todo.text} />
+          <TodoItem completed={todo.completed} key={todo.id} text={todo.text} />
 
         ))}
       </TodoList>
