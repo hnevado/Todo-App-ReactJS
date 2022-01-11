@@ -30,6 +30,25 @@ function App(props) {
   const completedTodos = todos.filter(todo => todo.completed).length;
   const totalTodos = todos.length;
 
+
+  let searchedTodos = [];
+
+  if (!searchValue.length > 0)
+   searchedTodos=todos;
+  else
+  {
+     searchedTodos = todos.filter(todo => {
+
+      const todoText = todo.text.toLowerCase();
+      const searchText = searchValue.toLowerCase();
+
+      return todoText.includes(searchText);
+
+     });
+    
+
+  }
+
   //Devolvemos los los componentes que vamos a utilizar, englobados en la etiqueta invisible React.fragment (para no llenar de divs innecesarios nuestra app)
   //Por cada todo que haya dentro de nuestra lista de todos, podamos renderizar una vez nuestro todo
   //Cuando hacemos un render de una lista (todos), debemos mandar una propiedad key a nuestros componentes para que React pueda identificar qué componente es cual dentro de una lista
@@ -41,7 +60,7 @@ function App(props) {
       <TodoSearch searchValue={searchValue} setSearchValue={setSearchValue}/>
       <TodoList>
 
-        {todos.map(todo => (
+        {searchedTodos.map(todo => (
           //Por cada todo, renderizamos un TodoItem
           <TodoItem completed={todo.completed} key={todo.id} text={todo.text} />
 
