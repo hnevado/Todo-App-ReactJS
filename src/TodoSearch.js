@@ -1,9 +1,9 @@
 import React from 'react';
 
-function TodoSearch() {
+function TodoSearch({searchValue, setSearchValue}) {
 
     //const estado = React.useState();
-    const [searchValue, setSearchValue] = React.useState('');
+    
     const onChange = (event) => {
 
         setSearchValue(event.target.value);
@@ -15,7 +15,7 @@ function TodoSearch() {
     return (
         <React.Fragment>
            <p id="buscador_todos"><input value={searchValue} type="text" onChange={onChange} placeholder="Buscar"/></p>
-           <p>{searchValue}</p>
+          
         </React.Fragment>
     );
 

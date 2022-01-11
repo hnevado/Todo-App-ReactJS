@@ -1,10 +1,11 @@
 import React from 'react';
 
-function TodoCounter() {
+function TodoCounter({total, completed}) {
+
 
 return (
 
-    <h2 className="contador-todos">Completado X de Y todos</h2>
+    <h2 className="contador-todos">Completado {completed} de {total} todos</h2>
 
 );
 

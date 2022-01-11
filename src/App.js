@@ -12,7 +12,7 @@ import './CreateTodoButton.css';
 import './App.css';
 
 //Creamos un array con objetos para una lista de todos predefinida
-const todos = [
+const defaultTodos = [
 
    {id:1, text: 'Leer documentación reactjs', completed:true},
    {id:2, text: 'Crear un proyecto reactjs', completed:false},
@@ -20,7 +20,15 @@ const todos = [
 
 ]
 
+
+
 function App(props) {
+
+  const [todos,setTodos] = React.useState(defaultTodos);
+  const [searchValue, setSearchValue] = React.useState('');
+
+  const completedTodos = todos.filter(todo => todo.completed).length;
+  const totalTodos = todos.length;
 
   //Devolvemos los los componentes que vamos a utilizar, englobados en la etiqueta invisible React.fragment (para no llenar de divs innecesarios nuestra app)
   //Por cada todo que haya dentro de nuestra lista de todos, podamos renderizar una vez nuestro todo
@@ -29,8 +37,8 @@ function App(props) {
 
   return (
     <React.Fragment>
-      <TodoCounter />
-      <TodoSearch />
+      <TodoCounter total={totalTodos} completed={completedTodos}/>
+      <TodoSearch searchValue={searchValue} setSearchValue={setSearchValue}/>
       <TodoList>
 
         {todos.map(todo => (
