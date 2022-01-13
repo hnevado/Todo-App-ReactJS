@@ -49,6 +49,35 @@ function App(props) {
 
   }
 
+
+
+
+  //Marcar como completado los todos
+  const completeTodo = (id) => {
+
+    const newTodos = [...todos];
+    const todoIndex = todos.findIndex(todo => todo.id == id);
+    
+    if (newTodos[todoIndex].completed)
+      newTodos[todoIndex].completed=false;
+    else
+    newTodos[todoIndex].completed=true;
+
+    setTodos(newTodos);
+
+  }
+
+  const deleteTodo = (id) => {
+
+    const newTodos = [...todos];
+    const todoIndex = todos.findIndex(todo => todo.id == id);
+    
+    newTodos.splice(todoIndex,1);
+
+    setTodos(newTodos);
+
+  }
+
   //Devolvemos los los componentes que vamos a utilizar, englobados en la etiqueta invisible React.fragment (para no llenar de divs innecesarios nuestra app)
   //Por cada todo que haya dentro de nuestra lista de todos, podamos renderizar una vez nuestro todo
   //Cuando hacemos un render de una lista (todos), debemos mandar una propiedad key a nuestros componentes para que React pueda identificar qué componente es cual dentro de una lista
@@ -62,7 +91,7 @@ function App(props) {
 
         {searchedTodos.map(todo => (
           //Por cada todo, renderizamos un TodoItem
-          <TodoItem completed={todo.completed} key={todo.id} text={todo.text} />
+          <TodoItem completed={todo.completed} key={todo.id} text={todo.text} onComplete={() => completeTodo(todo.id)} onDelete={() => deleteTodo(todo.id)}/>
 
         ))}
       </TodoList>
