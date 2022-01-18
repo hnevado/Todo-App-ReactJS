@@ -83,7 +83,7 @@ function App(props) {
   //Cuando hacemos un render de una lista (todos), debemos mandar una propiedad key a nuestros componentes para que React pueda identificar qué componente es cual dentro de una lista
   //(Hay que enviarle un identificador único) y así nos evita render innecesarios cuando un render no debe cambiar
 
-  return (
+  return ( 
     <React.Fragment>
       <TodoCounter total={totalTodos} completed={completedTodos}/>
       <TodoSearch searchValue={searchValue} setSearchValue={setSearchValue}/>
