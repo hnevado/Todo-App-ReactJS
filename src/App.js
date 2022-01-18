@@ -12,19 +12,32 @@ import './CreateTodoButton.css';
 import './App.css';
 
 //Creamos un array con objetos para una lista de todos predefinida
-const defaultTodos = [
+/*const defaultTodos = [
 
    {id:1, text: 'Leer documentación reactjs', completed:true},
    {id:2, text: 'Crear un proyecto reactjs', completed:false},
    {id:3, text: 'Programar una app con reactjs', completed:false},
 
 ]
-
-
+*/
 
 function App(props) {
 
-  const [todos,setTodos] = React.useState(defaultTodos);
+  const localStorageTodos = localStorage.getItem("TODOS_V1");
+  let parsedTodos;
+
+  if (localStorageTodos)
+  {
+    //Para volver a transformarla en JS, llamo a JSON.parse
+    parsedTodos=JSON.parse(localStorageTodos);
+  }
+  else
+  {
+    localStorage.setItem("TODOS_V1",JSON.stringify([])); //Con stringify transformo en texto cualquier dato, en este caso un array
+    parsedTodos=[];
+  }
+
+  const [todos,setTodos] = React.useState(parsedTodos);
   const [searchValue, setSearchValue] = React.useState('');
 
   const completedTodos = todos.filter(todo => todo.completed).length;
@@ -50,7 +63,14 @@ function App(props) {
   }
 
 
+  const saveTodos = (newTodos) => {
 
+      const stringifiedTodos = JSON.stringify(newTodos);
+      localStorage.setItem("TODOS_V1",stringifiedTodos);
+
+      setTodos(newTodos);
+
+  }
 
   //Marcar como completado los todos
   const completeTodo = (id) => {
@@ -63,7 +83,7 @@ function App(props) {
     else
     newTodos[todoIndex].completed=true;
 
-    setTodos(newTodos);
+    saveTodos(newTodos);
 
   }
 
@@ -74,7 +94,7 @@ function App(props) {
     
     newTodos.splice(todoIndex,1);
 
-    setTodos(newTodos);
+    saveTodos(newTodos);
 
   }
 
