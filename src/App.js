@@ -4,6 +4,8 @@ import {TodoSearch} from './TodoSearch';
 import {TodoList} from './TodoList';
 import {TodoItem} from './TodoItem';
 import {CreateTodoButton} from './CreateTodoButton';
+import {useLocalStorage} from './customHooks/useLocalStorage';
+
 import './TodoCounter.css';
 import './TodoItem.css';
 import './TodoList.css';
@@ -23,21 +25,8 @@ import './App.css';
 
 function App(props) {
 
-  const localStorageTodos = localStorage.getItem("TODOS_V1");
-  let parsedTodos;
+  const [todos, saveTodos] = useLocalStorage('TODOS_V1',[]);
 
-  if (localStorageTodos)
-  {
-    //Para volver a transformarla en JS, llamo a JSON.parse
-    parsedTodos=JSON.parse(localStorageTodos);
-  }
-  else
-  {
-    localStorage.setItem("TODOS_V1",JSON.stringify([])); //Con stringify transformo en texto cualquier dato, en este caso un array
-    parsedTodos=[];
-  }
-
-  const [todos,setTodos] = React.useState(parsedTodos);
   const [searchValue, setSearchValue] = React.useState('');
 
   const completedTodos = todos.filter(todo => todo.completed).length;
@@ -63,14 +52,7 @@ function App(props) {
   }
 
 
-  const saveTodos = (newTodos) => {
 
-      const stringifiedTodos = JSON.stringify(newTodos);
-      localStorage.setItem("TODOS_V1",stringifiedTodos);
-
-      setTodos(newTodos);
-
-  }
 
   //Marcar como completado los todos
   const completeTodo = (id) => {
