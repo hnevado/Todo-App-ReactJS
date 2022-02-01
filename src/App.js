@@ -5,6 +5,8 @@ import {TodoList} from './TodoList';
 import {TodoItem} from './TodoItem';
 import {CreateTodoButton} from './CreateTodoButton';
 import {useLocalStorage} from './customHooks/useLocalStorage';
+import {Modal} from './Modal';
+import {TodoForm} from './TodoForm';
 
 import './TodoCounter.css';
 import './TodoItem.css';
@@ -12,6 +14,8 @@ import './TodoList.css';
 import './TodoSearch.css';
 import './CreateTodoButton.css';
 import './App.css';
+import './Modal.css';
+import './TodoForm.css';
 
 //Creamos un array con objetos para una lista de todos predefinida
 /*const defaultTodos = [
@@ -26,7 +30,7 @@ import './App.css';
 function App(props) {
 
   const [todos, saveTodos] = useLocalStorage('TODOS_V1',[]);
-
+  const [openModal, setOpenModal] = React.useState(false);
   const [searchValue, setSearchValue] = React.useState('');
 
   const completedTodos = todos.filter(todo => todo.completed).length;
@@ -54,6 +58,21 @@ function App(props) {
 
 
 
+  const addTodo = (id,text) => {
+
+    const newTodos = [...todos];
+    
+    newTodos.push( {
+
+      id,
+      text
+
+    })
+
+    saveTodos(newTodos);
+
+  }
+
   //Marcar como completado los todos
   const completeTodo = (id) => {
 
@@ -80,6 +99,15 @@ function App(props) {
 
   }
 
+  //useEffect antes de renderizar
+  //useLayoutEffect después renderizar (en caso de hacer eventos, add event listener con etiquetas de html que no podemos manipular desde react)
+  React.useEffect(() => {
+
+      console.log("use affect");
+
+
+  })
+
   //Devolvemos los los componentes que vamos a utilizar, englobados en la etiqueta invisible React.fragment (para no llenar de divs innecesarios nuestra app)
   //Por cada todo que haya dentro de nuestra lista de todos, podamos renderizar una vez nuestro todo
   //Cuando hacemos un render de una lista (todos), debemos mandar una propiedad key a nuestros componentes para que React pueda identificar qué componente es cual dentro de una lista
@@ -87,6 +115,11 @@ function App(props) {
 
   return ( 
     <React.Fragment>
+       {openModal && (
+          <Modal setOpenModal={setOpenModal}>
+            <TodoForm addTodo={addTodo} setOpenModal={setOpenModal}/>
+          </Modal>
+        )}
       <TodoCounter total={totalTodos} completed={completedTodos}/>
       <TodoSearch searchValue={searchValue} setSearchValue={setSearchValue}/>
       <TodoList>
@@ -97,7 +130,9 @@ function App(props) {
 
         ))}
       </TodoList>
-      <CreateTodoButton />
+      <CreateTodoButton setOpenModal={setOpenModal}/>
+
+
     </React.Fragment>
   );
 }

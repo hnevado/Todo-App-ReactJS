@@ -1,17 +1,17 @@
 import React from 'react';
 
-function CreateTodoButton() {
+function CreateTodoButton(props) {
 
     
     const onClickButton = (msg) => {
-        console.log(msg)
+        props.setOpenModal(true);
     }
 
     return (
 
         <p className="textRight marginRight10">
             <button id="btnNewTodo"
-             onClick={() => onClickButton('Clic en el botón de nuevo todo')}
+             onClick={onClickButton}
             >
                 
                 +
