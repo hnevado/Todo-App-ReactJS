@@ -10,7 +10,7 @@ function TodoItem(props) {
             &#x2713; 
             </span>
             <span className={`todo-text ${props.completed && 'todo-text-completed'}`}> {props.text} </span>
-            <span onClick={props.onDelete}> X </span>
+            <span className='icondelete' onClick={props.onDelete}> X </span>
         </li>
 
     );
