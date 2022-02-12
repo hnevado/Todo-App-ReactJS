@@ -1,31 +1,22 @@
 import React from 'react';
-import {TodoCounter} from './TodoCounter';
-import {TodoSearch} from './TodoSearch';
-import {TodoList} from './TodoList';
-import {TodoItem} from './TodoItem';
-import {CreateTodoButton} from './CreateTodoButton';
+import {TodoCounter} from './components/TodoCounter';
+import {TodoSearch} from './components/TodoSearch';
+import {TodoList} from './components/TodoList';
+import {TodoItem} from './components/TodoItem';
+import {CreateTodoButton} from './components/CreateTodoButton';
 import {useLocalStorage} from './customHooks/useLocalStorage';
 import {Modal} from './Modal';
-import {TodoForm} from './TodoForm';
+import {TodoForm} from './components/TodoForm';
 
-import './TodoCounter.css';
-import './TodoItem.css';
-import './TodoList.css';
-import './TodoSearch.css';
-import './CreateTodoButton.css';
+import './components/TodoCounter.css';
+import './components/TodoItem.css';
+import './components/TodoList.css';
+import './components/TodoSearch.css';
+import './components/CreateTodoButton.css';
 import './App.css';
 import './Modal.css';
-import './TodoForm.css';
+import './components/TodoForm.css';
 
-//Creamos un array con objetos para una lista de todos predefinida
-/*const defaultTodos = [
-
-   {id:1, text: 'Leer documentación reactjs', completed:true},
-   {id:2, text: 'Crear un proyecto reactjs', completed:false},
-   {id:3, text: 'Programar una app con reactjs', completed:false},
-
-]
-*/
 
 function App(props) {
 
